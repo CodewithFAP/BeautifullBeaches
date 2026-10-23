@@ -1,0 +1,5237 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BeautyOfBeaches | Explore Beyond the Horizon</title>
+  <link rel="icon" type="image/png" href="assets/beach-sunset-logo.png" />
+  <meta name="description" content="Discover the world's most beautiful beaches with BeautyOfBeaches." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --ocean: #00d9d0;
+      --blue: #087fbc;
+      --deep: #061d35;
+      --white: #ffffff;
+      --muted: #a6bbca;
+      --glass: rgba(255, 255, 255, .09);
+      --border: rgba(255, 255, 255, .18);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      color: white;
+      background: #061b30;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    ::selection {
+      background: #00d9d0;
+      color: #062239;
+    }
+
+    /* Animated background glow */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 15% 20%, #07516a 0%, transparent 45%),
+        radial-gradient(ellipse at 90% 55%, #113b65 0%, transparent 45%),
+        linear-gradient(135deg, #041525, #082d49, #06182b);
+      background-size: 180% 180%;
+      animation: oceanGlow 15s ease-in-out infinite alternate;
+    }
+
+    @keyframes oceanGlow {
+      0% {
+        background-position: 0% 0%;
+      }
+
+      100% {
+        background-position: 100% 100%;
+      }
+    }
+
+    /* =========================
+   FLOATING PARTICLES
+========================= */
+    #particles {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      bottom: -40px;
+      width: var(--size);
+      height: var(--size);
+      border: 1px solid rgba(91, 255, 245, .4);
+      border-radius: 50%;
+      background: rgba(55, 230, 231, .06);
+      box-shadow: 0 0 15px rgba(0, 217, 208, .12);
+      animation: floatUp var(--duration) linear infinite;
+      animation-delay: var(--delay);
+      left: var(--left);
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translate3d(0, 0, 0) scale(.6);
+        opacity: 0;
+      }
+
+      15% {
+        opacity: .65;
+      }
+
+      50% {
+        transform: translate3d(40px, -50vh, 0) scale(1.1);
+      }
+
+      85% {
+        opacity: .4;
+      }
+
+      100% {
+        transform: translate3d(-30px, -115vh, 0) scale(.5);
+        opacity: 0;
+      }
+    }
+
+    /* =========================
+   NAVBAR
+========================= */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 19px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      background: rgba(4, 21, 37, .55);
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      backdrop-filter: blur(20px);
+      transition: .35s;
+    }
+
+    .navbar.scrolled {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      background: rgba(3, 17, 30, .93);
+      box-shadow: 0 10px 35px #0003;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .logo-icon {
+      display: grid;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #00e6d5, #1684df);
+      box-shadow: 0 0 25px #00d9d044;
+      animation: logoFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes logoFloat {
+      50% {
+        transform: translateY(-4px) rotate(-5deg);
+      }
+    }
+
+    .logo span:last-child {
+      color: var(--ocean);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 33px;
+    }
+
+    .nav-links a {
+      color: #d8e9f2;
+      font-size: 14px;
+      transition: color .3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: -7px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--ocean);
+      transition: width .3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--ocean);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 12px 21px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #00d9d0, #078fcb);
+      color: #041d30 !important;
+      font-weight: 700;
+      box-shadow: 0 0 25px #00d9d022;
+    }
+
+    .nav-cta::after {
+      display: none;
+    }
+
+    .menu-btn {
+      display: none;
+      border: 1px solid var(--border);
+      background: var(--glass);
+      color: white;
+      border-radius: 12px;
+      padding: 9px 13px;
+      font-size: 23px;
+    }
+
+    /* =========================
+   HERO SECTION
+========================= */
+    .hero {
+      min-height: 790px;
+      min-height: min(900px, 100svh);
+      position: relative;
+      isolation: isolate;
+      display: flex;
+      align-items: center;
+      padding: 150px 8% 110px;
+      overflow: hidden;
+    }
+
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      height: 100%;
+      filter: brightness(.53) saturate(1.2);
+      animation: heroZoom 24s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroZoom {
+      from {
+        transform: scale(1);
+      }
+
+      to {
+        transform: scale(1.14);
+      }
+    }
+
+    .hero-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(3, 18, 32, .92), rgba(3, 18, 32, .54) 52%, rgba(3, 18, 32, .1)),
+        linear-gradient(0deg, #061b30 0%, transparent 45%, rgba(2, 18, 30, .2));
+    }
+
+    .hero-wave {
+      position: absolute;
+      bottom: -5px;
+      left: -10%;
+      width: 120%;
+      height: 100px;
+      background: #061b30;
+      border-radius: 50% 50% 0 0 / 45% 45% 0 0;
+      animation: waveMove 7s ease-in-out infinite alternate;
+    }
+
+    @keyframes waveMove {
+      from {
+        transform: translateX(-3%) rotate(-1deg);
+      }
+
+      to {
+        transform: translateX(3%) rotate(1deg);
+      }
+    }
+
+    .hero-content {
+      max-width: 760px;
+      position: relative;
+      z-index: 2;
+      animation: heroEnter 1.1s both;
+    }
+
+    @keyframes heroEnter {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgb(255, 255, 255);
+      background: rgb(255, 255, 255);
+      border-radius: 50px;
+      padding: 10px 16px;
+      color: #ffffff;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background: #00f0d5;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #00f0d5;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      50% {
+        opacity: .35;
+        transform: scale(.65);
+      }
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 7.3vw, 94px);
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 .gradient {
+      display: block;
+      background: linear-gradient(90deg, #fff, #73fff2, #64bdfd, #fff);
+      background-size: 200%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: textShine 6s linear infinite;
+    }
+
+    @keyframes textShine {
+      to {
+        background-position: 200% center;
+      }
+    }
+
+    .hero p {
+      max-width: 570px;
+      font-size: 17px;
+      line-height: 1.9;
+      color: #d1e1ea;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 17px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 25px;
+      border: 1px solid transparent;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: transform .35s, box-shadow .35s, .35s;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, #00e1d0, #078ed5);
+      color: #032137;
+      box-shadow: 0 10px 30px #00d9d033;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-5px) scale(1.025);
+      box-shadow: 0 16px 40px #00d9d055;
+    }
+
+    .btn-outline {
+      color: white;
+      border-color: #ffffff66;
+      background: #ffffff0c;
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-outline:hover {
+      background: #ffffff20;
+      transform: translateY(-4px);
+    }
+
+    .btn .arrow {
+      display: inline-block;
+      transition: transform .3s;
+    }
+
+    .btn:hover .arrow {
+      transform: translateX(5px);
+    }
+
+    .hero-bottom {
+      position: absolute;
+      bottom: 100px;
+      left: 8%;
+      right: 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 25px;
+      z-index: 3;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 35px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      padding-right: 28px;
+      border-right: 1px solid #ffffff40;
+    }
+
+    .stat:last-child {
+      border: none;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 25px;
+      color: white;
+    }
+
+    .stat span {
+      display: block;
+      font-size: 12px;
+      color: #c0d7e5;
+      margin-top: 5px;
+    }
+
+    .scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #d1e9f1;
+      text-transform: uppercase;
+    }
+
+    .mouse-icon {
+      width: 22px;
+      height: 34px;
+      border: 1px solid #ffffff99;
+      border-radius: 15px;
+      position: relative;
+    }
+
+    .mouse-icon::after {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 9px;
+      width: 3px;
+      height: 6px;
+      border-radius: 4px;
+      background: var(--ocean);
+      animation: mouseScroll 1.4s infinite;
+    }
+
+    @keyframes mouseScroll {
+      to {
+        transform: translateY(10px);
+        opacity: 0;
+      }
+    }
+
+    /* =========================
+   SHARED SECTIONS
+========================= */
+    .section {
+      padding: 105px 8%;
+      position: relative;
+    }
+
+    .section-heading {
+      max-width: 700px;
+      margin: 0 auto 48px;
+      text-align: center;
+    }
+
+    .section-tag {
+      color: var(--ocean);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .section-heading h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(34px, 4.5vw, 55px);
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .section-heading h2 span {
+      color: var(--ocean);
+    }
+
+    .section-heading p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================
+   DESTINATION SEARCH
+========================= */
+    .search-panel {
+      position: relative;
+      z-index: 10;
+      width: min(1050px, 84%);
+      margin: -45px auto 0;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr auto;
+      align-items: center;
+      gap: 15px;
+      background: rgba(10, 40, 62, .88);
+      border: 1px solid #ffffff1e;
+      border-radius: 23px;
+      backdrop-filter: blur(25px);
+      box-shadow: 0 25px 70px #0003;
+      animation: searchFloat 5s ease-in-out infinite;
+    }
+
+    @keyframes searchFloat {
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+
+    .search-field {
+      padding: 8px 13px;
+      border-right: 1px solid #ffffff1a;
+      min-width: 0;
+    }
+
+    .search-field label {
+      display: block;
+      color: #8baebe;
+      font-size: 11px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .search-field input,
+    .search-field select {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      width: 100%;
+      font-size: 14px;
+    }
+
+    .search-field select option {
+      color: #061b30;
+    }
+
+    .search-field input::placeholder {
+      color: #d0dce3;
+    }
+
+    .search-submit {
+      border: 0;
+      background: linear-gradient(135deg, #00e4d0, #0c91dc);
+      color: #04243a;
+      padding: 17px 23px;
+      border-radius: 15px;
+      font-weight: 800;
+      transition: .3s;
+    }
+
+    .search-submit:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 25px #00d9d055;
+    }
+
+    /* =========================
+   DESTINATION CARDS
+========================= */
+    .destinations {
+      padding-top: 115px;
+    }
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 35px;
+    }
+
+    .filter-btn {
+      border: 1px solid #ffffff20;
+      background: #ffffff08;
+      color: #bcd0dc;
+      border-radius: 40px;
+      padding: 10px 20px;
+      transition: .3s;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--ocean);
+      color: #032337;
+      border-color: var(--ocean);
+      box-shadow: 0 0 22px #00d9d02b;
+    }
+
+    .destination-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 27px;
+      perspective: 1200px;
+    }
+
+    .destination-card {
+      position: relative;
+      min-width: 0;
+      height: 425px;
+      border: 1px solid #ffffff20;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #10314a;
+      transform-style: preserve-3d;
+      transition: transform .18s ease, box-shadow .35s, border-color .35s;
+      box-shadow: 0 20px 50px #0002;
+      will-change: transform;
+    }
+
+    .destination-card:hover {
+      border-color: #00d9d088;
+      box-shadow: 0 35px 65px #0005, 0 0 25px #00d9d014;
+      z-index: 2;
+    }
+
+    .destination-card.hidden {
+      display: none;
+    }
+
+    .card-image {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .card-image img {
+      height: 100%;
+      transition: transform 1s cubic-bezier(.2, .8, .2, 1), filter .5s;
+      filter: saturate(1.12);
+    }
+
+    .destination-card:hover .card-image img {
+      transform: scale(1.12);
+      filter: saturate(1.35) brightness(1.05);
+    }
+
+    .card-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, .1), transparent 25%, rgba(1, 15, 28, .15) 40%, rgba(1, 16, 29, .96) 100%);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 19px;
+      left: 19px;
+      padding: 8px 13px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: 1px solid #ffffff4a;
+      background: #071c30a8;
+      border-radius: 50px;
+      backdrop-filter: blur(12px);
+      z-index: 2;
+    }
+
+    .favorite {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      display: grid;
+      place-items: center;
+      width: 39px;
+      height: 39px;
+      border: 1px solid #ffffff44;
+      border-radius: 50%;
+      background: #061b3088;
+      color: white;
+      font-size: 19px;
+      transition: .3s;
+      z-index: 3;
+    }
+
+    .favorite:hover,
+    .favorite.liked {
+      background: #ff6480;
+      border-color: #ff6480;
+      transform: scale(1.1);
+    }
+
+    .card-content {
+      position: absolute;
+      left: 23px;
+      right: 23px;
+      bottom: 22px;
+      z-index: 2;
+      transform: translateZ(25px);
+    }
+
+    .card-location {
+      font-size: 12px;
+      color: #7ff8ef;
+      margin-bottom: 9px;
+      letter-spacing: .7px;
+    }
+
+    .card-content h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 29px;
+      margin-bottom: 10px;
+    }
+
+    .card-content p {
+      font-size: 12px;
+      color: #c4d7e1;
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding-top: 15px;
+      border-top: 1px solid #ffffff28;
+    }
+
+    .rating {
+      color: #ffd778;
+      font-size: 12px;
+    }
+
+    .explore-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #7ff8ef;
+      font-size: 12px;
+      font-weight: 700;
+      border: 0;
+      background: transparent;
+    }
+
+    .explore-link span {
+      transition: transform .3s;
+    }
+
+    .explore-link:hover span {
+      transform: translateX(5px);
+    }
+
+    .empty-state {
+      display: none;
+      color: #bcd0dc;
+      text-align: center;
+      padding: 35px;
+      grid-column: 1/-1;
+    }
+
+    /* =========================
+   EXPERIENCE SECTION
+========================= */
+    .experience {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .experience-visual {
+      position: relative;
+      min-height: 550px;
+      perspective: 1000px;
+    }
+
+    .experience-photo {
+      position: absolute;
+      overflow: hidden;
+      border: 1px solid #ffffff36;
+      border-radius: 25px;
+      box-shadow: 0 25px 65px #0004;
+    }
+
+    .experience-photo img {
+      height: 100%;
+      transition: transform .8s;
+    }
+
+    .experience-photo:hover img {
+      transform: scale(1.08);
+    }
+
+    .photo-main {
+      left: 5%;
+      top: 4%;
+      width: 72%;
+      height: 390px;
+      transform: rotate(-4deg);
+      animation: photoFloat 7s ease-in-out infinite;
+    }
+
+    .photo-small {
+      right: 0;
+      bottom: 0;
+      width: 53%;
+      height: 270px;
+      border: 7px solid #08263e;
+      transform: rotate(5deg);
+      animation: photoFloat 6s ease-in-out infinite reverse;
+    }
+
+    @keyframes photoFloat {
+      50% {
+        translate: 0 -13px;
+      }
+    }
+
+    .experience-stamp {
+      position: absolute;
+      left: 0;
+      bottom: 30px;
+      width: 115px;
+      height: 115px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00dfce, #087fc5);
+      color: #052239;
+      display: grid;
+      place-content: center;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 800;
+      transform: rotate(-12deg);
+      box-shadow: 0 15px 40px #00d9d033;
+      animation: stampSpin 20s linear infinite;
+    }
+
+    @keyframes stampSpin {
+      to {
+        rotate: 360deg;
+      }
+    }
+
+    .experience-copy .section-tag {
+      margin-bottom: 17px;
+    }
+
+    .experience-copy h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(35px, 4.5vw, 53px);
+      line-height: 1.2;
+      margin-bottom: 22px;
+    }
+
+    .experience-copy h2 span {
+      color: var(--ocean);
+    }
+
+    .experience-copy>p {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-bottom: 32px;
+    }
+
+    .feature {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .feature-icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      background: #00d9d014;
+      border: 1px solid #00d9d033;
+      border-radius: 13px;
+      font-size: 21px;
+      transition: .4s;
+    }
+
+    .feature:hover .feature-icon {
+      transform: rotateY(180deg);
+      background: #00d9d029;
+    }
+
+    .feature strong {
+      display: block;
+      font-size: 13px;
+      margin: 3px 0 7px;
+    }
+
+    .feature small {
+      display: block;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 11px;
+    }
+
+    /* =========================
+   DISCOVER CATEGORIES
+========================= */
+    .categories {
+      padding-top: 50px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .category-card {
+      position: relative;
+      padding: 30px 22px;
+      min-height: 190px;
+      border: 1px solid #ffffff16;
+      border-radius: 22px;
+      background: linear-gradient(145deg, #ffffff0e, #ffffff03);
+      overflow: hidden;
+      transition: transform .4s, border-color .4s, background .4s;
+      transform-style: preserve-3d;
+    }
+
+    .category-card::before {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      right: -75px;
+      bottom: -90px;
+      border-radius: 50%;
+      background: #00d9d02a;
+      filter: blur(25px);
+      transition: .5s;
+    }
+
+    .category-card:hover {
+      transform: translateY(-10px) rotateX(4deg);
+      border-color: #00d9d077;
+      background: #ffffff12;
+    }
+
+    .category-card:hover::before {
+      transform: scale(1.8);
+    }
+
+    .category-icon {
+      font-size: 34px;
+      margin-bottom: 22px;
+      display: inline-block;
+      transition: transform .4s;
+    }
+
+    .category-card:hover .category-icon {
+      transform: translateY(-6px) rotate(10deg) scale(1.12);
+    }
+
+    .category-card h3 {
+      font-size: 17px;
+      margin-bottom: 9px;
+    }
+
+    .category-card p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    /* =========================
+   FEATURED PARADISE BANNER
+========================= */
+    .paradise-banner {
+      margin: 40px 8% 100px;
+      min-height: 390px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      border: 1px solid #ffffff27;
+      display: flex;
+      align-items: center;
+      padding: 55px 7%;
+      isolation: isolate;
+    }
+
+    .paradise-banner>img {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      z-index: -2;
+      transition: transform 1s;
+    }
+
+    .paradise-banner:hover>img {
+      transform: scale(1.08);
+    }
+
+    .paradise-banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #03192beF, #03192b8c 55%, #03192b25);
+      z-index: -1;
+    }
+
+    .banner-content {
+      max-width: 600px;
+    }
+
+    .banner-content .section-tag {
+      color: #7bfff0;
+    }
+
+    .banner-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 59px);
+      line-height: 1.15;
+      margin: 17px 0;
+    }
+
+    .banner-content p {
+      color: #d2e1e9;
+      font-size: 14px;
+      line-height: 1.9;
+      margin-bottom: 25px;
+    }
+
+    /* =========================
+   NEWSLETTER
+========================= */
+    .newsletter {
+      margin: 0 8% 100px;
+      padding: 55px 7%;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #00d9d033;
+      border-radius: 28px;
+      background: linear-gradient(120deg, #08768b40, #0d46704d);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .newsletter::before {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -130px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: #00d9d018;
+      filter: blur(30px);
+      animation: logoFloat 5s infinite;
+    }
+
+    .newsletter-copy {
+      position: relative;
+      max-width: 490px;
+    }
+
+    .newsletter-copy h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 40px);
+      margin-bottom: 12px;
+    }
+
+    .newsletter-copy p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .newsletter-form {
+      position: relative;
+      display: flex;
+      gap: 9px;
+      width: min(440px, 100%);
+      padding: 7px;
+      border: 1px solid #ffffff25;
+      background: #061b3077;
+      border-radius: 50px;
+    }
+
+    .newsletter-form input {
+      min-width: 0;
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      padding: 10px 15px;
+      font-size: 13px;
+    }
+
+    .newsletter-form input::placeholder {
+      color: #91adbd;
+    }
+
+    .newsletter-form button {
+      flex-shrink: 0;
+      border: 0;
+      padding: 13px 20px;
+      border-radius: 50px;
+      background: var(--ocean);
+      color: #052239;
+      font-size: 12px;
+      font-weight: 800;
+      transition: .3s;
+    }
+
+    .newsletter-form button:hover {
+      background: white;
+    }
+
+    /* =========================
+   FOOTER
+========================= */
+    .footer {
+      padding: 70px 8% 25px;
+      border-top: 1px solid #ffffff12;
+      background: #041322a8;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 45px;
+      padding-bottom: 45px;
+    }
+
+    .footer-about p {
+      max-width: 290px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+      margin-top: 20px;
+    }
+
+    .footer-column h4 {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .footer-column a {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 14px;
+      transition: color .3s, transform .3s;
+    }
+
+    .footer-column a:hover {
+      color: var(--ocean);
+      transform: translateX(5px);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid #ffffff20;
+      border-radius: 50%;
+      transition: .3s;
+    }
+
+    .social-links a:hover {
+      background: var(--ocean);
+      color: #052239;
+      transform: translateY(-4px);
+    }
+
+    .footer-bottom {
+      padding-top: 22px;
+      border-top: 1px solid #ffffff13;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+      color: #839eaf;
+      font-size: 11px;
+    }
+
+    .footer-bottom span {
+      color: var(--ocean);
+    }
+
+    /* =========================
+   TOAST & BACK TO TOP
+========================= */
+    .toast {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      z-index: 2000;
+      max-width: calc(100% - 30px);
+      padding: 14px 22px;
+      background: #0c3449;
+      border: 1px solid #00d9d066;
+      border-radius: 50px;
+      color: white;
+      box-shadow: 0 10px 40px #0005;
+      font-size: 13px;
+      text-align: center;
+      transform: translate(-50%, 100px);
+      opacity: 0;
+      transition: .4s;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+
+    .back-top {
+      position: fixed;
+      right: 25px;
+      bottom: 25px;
+      width: 45px;
+      height: 45px;
+      border: 1px solid #00d9d055;
+      background: #07324bdf;
+      color: var(--ocean);
+      border-radius: 50%;
+      font-size: 21px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(15px);
+      transition: .3s;
+      z-index: 900;
+      backdrop-filter: blur(12px);
+    }
+
+    .back-top.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .back-top:hover {
+      background: var(--ocean);
+      color: #062239;
+    }
+
+    /* =========================
+   RESPONSIVE DESIGN
+========================= */
+    @media (max-width: 1100px) {
+      .destination-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .destination-card {
+        height: 440px;
+      }
+
+      .experience {
+        gap: 40px;
+      }
+
+      .search-panel {
+        width: 90%;
+      }
+
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 780px) {
+      .navbar {
+        padding: 14px 5%;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 5%;
+        right: 5%;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 22px;
+        border: 1px solid #ffffff20;
+        border-radius: 20px;
+        background: rgba(4, 22, 39, .97);
+        backdrop-filter: blur(25px);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: .3s;
+      }
+
+      .nav-links.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .nav-cta {
+        text-align: center;
+      }
+
+      .hero {
+        min-height: 780px;
+        padding: 130px 6% 200px;
+      }
+
+      .hero h1 {
+        letter-spacing: -1px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .hero-bottom {
+        bottom: 80px;
+        left: 6%;
+        right: 6%;
+      }
+
+      .hero-stats {
+        gap: 15px;
+      }
+
+      .stat {
+        padding-right: 15px;
+      }
+
+      .stat strong {
+        font-size: 20px;
+      }
+
+      .stat span {
+        font-size: 10px;
+      }
+
+      .scroll-hint {
+        display: none;
+      }
+
+      .search-panel {
+        grid-template-columns: 1fr 1fr;
+        padding: 17px;
+        margin-top: -35px;
+      }
+
+      .search-field {
+        border-right: none;
+        border-bottom: 1px solid #ffffff16;
+        padding: 10px;
+      }
+
+      .search-submit {
+        grid-column: 1/-1;
+      }
+
+      .section {
+        padding: 80px 6%;
+      }
+
+      .destination-grid {
+        gap: 18px;
+      }
+
+      .destination-card {
+        height: 410px;
+      }
+
+      .experience {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .experience-visual {
+        min-height: 470px;
+      }
+
+      .photo-main {
+        height: 350px;
+      }
+
+      .photo-small {
+        height: 225px;
+      }
+
+      .experience-copy {
+        max-width: 600px;
+      }
+
+      .paradise-banner {
+        margin: 25px 6% 75px;
+        min-height: 350px;
+        padding: 40px 7%;
+      }
+
+      .newsletter {
+        margin: 0 6% 75px;
+        padding: 40px 6%;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .newsletter-form {
+        width: 100%;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 35px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .logo {
+        font-size: 20px;
+      }
+
+      .logo-icon {
+        width: 37px;
+        height: 37px;
+      }
+
+      .hero {
+        min-height: 760px;
+        padding-top: 115px;
+      }
+
+      .hero h1 {
+        font-size: clamp(43px, 12vw, 61px);
+      }
+
+      .hero-actions {
+        gap: 12px;
+      }
+
+      .btn {
+        padding: 14px 18px;
+        font-size: 12px;
+      }
+
+      .hero-bottom {
+        bottom: 75px;
+      }
+
+      .hero-stats {
+        gap: 12px;
+      }
+
+      .stat {
+        padding-right: 10px;
+      }
+
+      .stat strong {
+        font-size: 18px;
+      }
+
+      .stat span {
+        max-width: 85px;
+        line-height: 1.5;
+      }
+
+      .search-panel {
+        width: 90%;
+      }
+
+      .section-heading {
+        margin-bottom: 35px;
+      }
+
+      .destination-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .destination-card {
+        height: 440px;
+      }
+
+      .filters {
+        gap: 8px;
+      }
+
+      .filter-btn {
+        padding: 9px 14px;
+        font-size: 12px;
+      }
+
+      .experience-visual {
+        min-height: 390px;
+      }
+
+      .photo-main {
+        height: 290px;
+      }
+
+      .photo-small {
+        height: 190px;
+        border-width: 5px;
+      }
+
+      .experience-stamp {
+        width: 90px;
+        height: 90px;
+        font-size: 10px;
+      }
+
+      .feature-list {
+        grid-template-columns: 1fr;
+      }
+
+      .category-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .category-card {
+        padding: 23px 16px;
+        min-height: 175px;
+      }
+
+      .category-card h3 {
+        font-size: 15px;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+        border-radius: 20px;
+      }
+
+      .newsletter-form input {
+        padding: 13px;
+      }
+
+      .newsletter-form button {
+        width: 100%;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px 20px;
+      }
+
+      .footer-about {
+        grid-column: 1/-1;
+      }
+
+      .footer-bottom {
+        line-height: 1.8;
+      }
+
+      .back-top {
+        right: 15px;
+        bottom: 15px;
+      }
+    }
+
+    /* Reduced motion accessibility */
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    :root {
+      --aqua: #4ce8e2;
+      --blue: #13bce9;
+      --deep: #031827;
+      --glass: rgba(4, 28, 45, 0.58);
+      --line: rgba(135, 237, 244, 0.25);
+      --white: #f5feff;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: #031827;
+      color: var(--white);
+      font-family: "DM Sans", sans-serif;
+      overflow-x: hidden;
+    }
+
+    body:before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background:
+        linear-gradient(180deg, rgba(1, 15, 29, 0.1), #031827 88%),
+        url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2200&q=90") center/cover;
+      filter: saturate(1.12);
+    }
+
+    body:after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 20% 10%,
+          rgba(0, 190, 255, 0.18),
+          transparent 40%),
+        radial-gradient(ellipse at 85% 55%,
+          rgba(0, 255, 214, 0.12),
+          transparent 35%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .navbar {
+      background: rgba(2, 20, 35, 0.72);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+      padding: 13px 0;
+    }
+
+    .brandmark {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #5ffbf1, #0685df);
+      color: #00233a;
+      font-size: 24px;
+      box-shadow: 0 0 25px #1bd5ee66;
+    }
+
+    .brandname {
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      letter-spacing: 0.2px;
+    }
+
+    .brandtag {
+      font-size: 0.66rem;
+      letter-spacing: 2px;
+      color: #a7dce6;
+    }
+
+    .nav-link {
+      color: #e8faff !important;
+      font-size: 0.88rem;
+      margin: 0 3px;
+      transition: 0.25s;
+    }
+
+    .nav-link:hover {
+      color: var(--aqua) !important;
+      transform: translateY(-2px);
+    }
+
+    .btn-glow {
+      border: 0;
+      border-radius: 50px;
+      padding: 13px 23px;
+      color: #002638;
+      font-weight: 700;
+      background: linear-gradient(110deg, #6bfff0, #10a9ff);
+      box-shadow: 0 8px 30px #00c8ff45;
+      transition: 0.3s;
+    }
+
+    .btn-glow:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 14px 35px #00c8ff77;
+      color: #002638;
+    }
+
+    .btn-outline-light {
+      border-radius: 50px;
+      padding: 12px 22px;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 690px;
+      display: flex;
+      align-items: center;
+      isolation: isolate;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg,
+          rgba(2, 19, 33, 0.9),
+          rgba(2, 25, 39, 0.45) 52%,
+          rgba(2, 20, 33, 0.12)),
+        linear-gradient(0deg, #031827 0%, transparent 30%),
+        url("https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=2200&q=90") center/cover;
+      transform: scale(1.05);
+      animation: heroZoom 22s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroZoom {
+      to {
+        transform: scale(1.14) translateX(-1%);
+      }
+    }
+
+    .hero-content {
+      padding-top: 65px;
+      padding-bottom: 65px;
+      max-width: 650px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 9px;
+      align-items: center;
+      padding: 8px 14px;
+      border: 1px solid #80f8f055;
+      border-radius: 50px;
+      background: #06334c88;
+      color: #9bfff4;
+      font-size: 0.78rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #5dfff0;
+      box-shadow: 0 0 13px #5dfff0;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      50% {
+        opacity: 0.4;
+        transform: scale(0.7);
+      }
+    }
+
+    h1,
+    h2,
+    h3,
+    .serif {
+      font-family: "Playfair Display", serif;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.2rem, 7.5vw, 6.4rem);
+      line-height: 0.98;
+      letter-spacing: -2px;
+      margin: 25px 0;
+    }
+
+    .hero h1 span {
+      color: #70fff0;
+      text-shadow: 0 0 35px #16c8d455;
+    }
+
+    .hero p {
+      color: #d5edf4;
+      font-size: 1.08rem;
+      line-height: 1.8;
+      max-width: 540px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 13px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.35rem;
+      color: #8dfff5;
+    }
+
+    .stat span {
+      font-size: 0.78rem;
+      color: #c3dce4;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: #bcebf1;
+    }
+
+    .scroll-cue span {
+      display: block;
+      margin: 0 auto 8px;
+      width: 22px;
+      height: 34px;
+      border: 1px solid #b7ffff;
+      border-radius: 20px;
+      position: relative;
+    }
+
+    .scroll-cue span:after {
+      content: "";
+      position: absolute;
+      width: 3px;
+      height: 7px;
+      background: #8dfff6;
+      border-radius: 5px;
+      top: 6px;
+      left: 8px;
+      animation: scrollDot 1.4s infinite;
+    }
+
+    @keyframes scrollDot {
+      to {
+        transform: translateY(10px);
+        opacity: 0;
+      }
+    }
+
+    .section {
+      padding: 90px 0;
+      position: relative;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 42px;
+    }
+
+    .kicker {
+      color: var(--aqua);
+      font-size: 0.76rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2.1rem, 4vw, 3.6rem);
+      margin: 12px 0;
+    }
+
+    .section-heading p {
+      color: #bdd7df;
+      line-height: 1.8;
+    }
+
+    .glass-panel {
+      background: linear-gradient(145deg,
+          rgba(9, 47, 67, 0.78),
+          rgba(2, 24, 40, 0.72));
+      border: 1px solid var(--line);
+      box-shadow: 0 20px 65px #0003;
+      backdrop-filter: blur(16px);
+    }
+
+    .zone-filter {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .filter-btn {
+      border: 1px solid var(--line);
+      color: #d7f8ff;
+      background: #092a3caa;
+      border-radius: 30px;
+      padding: 9px 20px;
+      transition: 0.25s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: linear-gradient(100deg, #16c6ed, #56f4dc);
+      color: #00283a;
+      border-color: transparent;
+      box-shadow: 0 8px 22px #00d5ff30;
+    }
+
+    .beach-card {
+      height: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      transition:
+        transform 0.45s,
+        box-shadow 0.45s;
+      border: 1px solid #8ceaf233;
+      background: #062235;
+      transform-style: preserve-3d;
+    }
+
+    .beach-card:hover {
+      transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
+      box-shadow: 0 25px 50px #00c8ff24;
+      border-color: #69fff0aa;
+    }
+
+    .card-image {
+      height: 235px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s;
+    }
+
+    .beach-card:hover .card-image img {
+      transform: scale(1.12);
+    }
+
+    .card-image:after {
+      content: "";
+      position: absolute;
+      inset: 30% 0 0;
+      background: linear-gradient(transparent, #061a2bef);
+    }
+
+    .zone-tag {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #031f31c9;
+      border: 1px solid #a2fff455;
+      padding: 7px 12px;
+      border-radius: 30px;
+      font-size: 0.72rem;
+      color: #a4fff5;
+      backdrop-filter: blur(10px);
+    }
+
+    .card-body-custom {
+      padding: 19px;
+    }
+
+    .card-body-custom h3 {
+      font-size: 1.35rem;
+      margin-bottom: 7px;
+    }
+
+    .card-body-custom p {
+      color: #b7d1dc;
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
+    .card-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #80fff2;
+      font-size: 0.8rem;
+      margin-top: 15px;
+    }
+
+    .arrow-round {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1px solid #65f8ee88;
+      transition: 0.25s;
+    }
+
+    .beach-card:hover .arrow-round {
+      background: #6bfff0;
+      color: #002436;
+      transform: rotate(-35deg);
+    }
+
+    .featured-strip {
+      padding: 25px;
+      border-radius: 25px;
+    }
+
+    .featured-img {
+      height: 205px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .featured-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.6s;
+    }
+
+    .featured-img:hover img {
+      transform: scale(1.1);
+    }
+
+    .featured-img:after {
+      content: "";
+      position: absolute;
+      inset: 30% 0 0;
+      background: linear-gradient(transparent, #001522e8);
+    }
+
+    .featured-caption {
+      position: absolute;
+      z-index: 1;
+      bottom: 13px;
+      left: 15px;
+    }
+
+    .featured-caption h4 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    .featured-caption small {
+      color: #bde9ed;
+    }
+
+    .benefit-box {
+      height: 100%;
+      border-radius: 24px;
+      padding: 30px;
+    }
+
+    .benefit-item {
+      display: flex;
+      gap: 15px;
+      padding: 17px 0;
+      border-bottom: 1px solid #a8eaf222;
+    }
+
+    .benefit-item:last-child {
+      border: 0;
+    }
+
+    .benefit-icon {
+      width: 46px;
+      height: 46px;
+      flex-shrink: 0;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: #0bc3df1b;
+      border: 1px solid #64fff044;
+      font-size: 22px;
+    }
+
+    .benefit-item h4 {
+      font-size: 1rem;
+      margin: 0 0 5px;
+    }
+
+    .benefit-item p {
+      font-size: 0.82rem;
+      color: #b5d3dc;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .gallery-tile {
+      height: 245px;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gallery-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.65s;
+    }
+
+    .gallery-tile:hover img {
+      transform: scale(1.13) rotate(1deg);
+    }
+
+    .gallery-tile:after {
+      content: "↗";
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #001c2ac9;
+      border: 1px solid #b6fff477;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: 0.3s;
+    }
+
+    .gallery-tile:hover:after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-tile span {
+      position: absolute;
+      bottom: 15px;
+      left: 17px;
+      font-family: "Playfair Display", serif;
+      font-size: 1.2rem;
+      text-shadow: 0 2px 8px #000;
+    }
+
+    .about-card {
+      border-radius: 28px;
+      padding: clamp(25px, 5vw, 55px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .about-card:after {
+      position: absolute;
+      right: 3%;
+      bottom: -35px;
+      font-size: 180px;
+      opacity: 0.06;
+      transform: rotate(-20deg);
+      pointer-events: none;
+    }
+
+    .about-card p {
+      color: #c0d9e1;
+      line-height: 1.9;
+    }
+
+    .about-metric {
+      border-left: 2px solid var(--aqua);
+      padding-left: 15px;
+      margin-top: 22px;
+    }
+
+    .about-metric strong {
+      font-size: 1.7rem;
+      color: #8bfff4;
+      display: block;
+    }
+
+    .about-metric span {
+      font-size: 0.8rem;
+      color: #b8d4dc;
+    }
+
+    .form-control,
+    .form-select {
+      background: #031d30bb;
+      border: 1px solid #8beaf13b;
+      color: #f3ffff;
+      border-radius: 12px;
+      padding: 13px 15px;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      background: #06253a;
+      color: white;
+      border-color: #54f7e9;
+      box-shadow: 0 0 0 0.2rem #32e8df20;
+    }
+
+    .form-control::placeholder {
+      color: #8caeb9;
+    }
+
+    .form-select option {
+      background: #062238;
+    }
+
+    .form-panel {
+      border-radius: 24px;
+      padding: clamp(22px, 4vw, 38px);
+    }
+
+    .form-panel h3 {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+
+    .form-panel>p {
+      color: #abcbd5;
+      font-size: 0.9rem;
+      margin-bottom: 25px;
+    }
+
+    .form-message {
+      min-height: 22px;
+      color: #8cfff0;
+      font-size: 0.9rem;
+      margin-top: 12px;
+    }
+
+    .contact-card {
+      border-radius: 20px;
+      padding: 25px;
+      height: 100%;
+    }
+
+    .contact-card .big-icon {
+      font-size: 1.8rem;
+      color: var(--aqua);
+      margin-bottom: 15px;
+    }
+
+    .contact-card p {
+      color: #b8d4dc;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .sitemap-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .sitemap-links a {
+      padding: 10px 15px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      color: #c5eaf0;
+      font-size: 0.83rem;
+      transition: 0.2s;
+    }
+
+    .sitemap-links a:hover {
+      background: #0c5267;
+      color: #fff;
+    }
+
+    footer {
+      padding: 30px 0;
+      border-top: 1px solid var(--line);
+      background: #01121fd9;
+    }
+
+    .footer-brand {
+      font-family: "Playfair Display", serif;
+      font-size: 1.25rem;
+    }
+
+    .socials a {
+      width: 38px;
+      height: 38px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      margin-left: 7px;
+      transition: 0.2s;
+    }
+
+    .socials a:hover {
+      background: #48eee0;
+      color: #002436;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #toTop {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      z-index: 10;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid #78fff099;
+      background: #06334bd9;
+      color: #8efff5;
+      font-size: 20px;
+      display: none;
+      box-shadow: 0 5px 25px #0004;
+    }
+
+    .modal-content {
+      background: #06243a;
+      color: white;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+    }
+
+    .modal-header,
+    .modal-footer {
+      border-color: var(--line);
+    }
+
+    .toast-msg {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translate(-50%, 20px);
+      background: #063c4b;
+      border: 1px solid #7effe8;
+      color: white;
+      padding: 14px 20px;
+      border-radius: 14px;
+      z-index: 99;
+      opacity: 0;
+      transition: 0.3s;
+      pointer-events: none;
+    }
+
+    .toast-msg.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    @media (max-width: 991px) {
+      .hero-content {
+        max-width: 610px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 8vw, 5rem);
+      }
+
+      .navbar-collapse {
+        padding: 15px 0;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .hero {
+        min-height: 760px;
+        align-items: flex-start;
+      }
+
+      .hero-bg {
+        background-position: 58% center;
+      }
+
+      .hero-content {
+        padding-top: 95px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero h1 {
+        font-size: 3.35rem;
+        letter-spacing: -1px;
+      }
+
+      .hero p {
+        font-size: 0.98rem;
+      }
+
+      .hero-stats {
+        gap: 20px;
+        margin-top: 28px;
+      }
+
+      .section {
+        padding: 65px 0;
+      }
+
+      .scroll-cue {
+        display: none;
+      }
+
+      .card-image {
+        height: 220px;
+      }
+
+      .featured-img {
+        height: 220px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *:before,
+      *:after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* ================================
+       PROFESSIONAL VISUAL REFINEMENT
+       BeautyOfBeaches — warm coastal palette
+       ================================ */
+    :root {
+      --ocean: #285b59;
+      --blue: #6d9d99;
+      --deep: #343b39;
+      --white: #343b39;
+      --muted: #69736d;
+      --glass: rgba(250, 249, 245, .88);
+      --border: rgba(40, 91, 89, .16);
+      --aqua: #6c9d95;
+      --line: rgba(40, 91, 89, .16);
+      --cream: #faf9f5;
+      --sand: #f3ebdd;
+      --pink: #f6dde3;
+      --sage: #dce8d5;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 88px;
+    }
+
+    body {
+      margin: 0;
+      color: var(--deep);
+      background: var(--cream);
+      font-family: "DM Sans", sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      letter-spacing: -.01em;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      background:
+        radial-gradient(ellipse at 8% 8%, rgba(246, 221, 227, .68), transparent 34%),
+        radial-gradient(ellipse at 92% 32%, rgba(220, 232, 213, .72), transparent 34%),
+        var(--cream);
+      filter: none;
+      animation: none;
+    }
+
+    body::after {
+      display: none;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    ::selection {
+      background: var(--pink);
+      color: var(--deep);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    .serif,
+    .brandname,
+    .footer-brand {
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 600;
+      letter-spacing: -.035em;
+    }
+
+    p {
+      line-height: 1.8;
+    }
+
+    .container {
+      --bs-gutter-x: 2rem;
+    }
+
+    main {
+      background: var(--cream);
+    }
+
+    section,
+    #destinations,
+    #zones,
+    #featured,
+    #gallery,
+    #about,
+    #queries,
+    #feedback,
+    #contact,
+    #experience {
+      scroll-margin-top: 86px;
+    }
+
+    .section {
+      padding: clamp(64px, 8vw, 108px) 0;
+    }
+
+    .section:nth-of-type(even) {
+      background: linear-gradient(180deg, var(--cream), #f7f2e9);
+    }
+
+    .section-heading,
+    .section-heading p {
+      color: var(--deep);
+    }
+
+    .section-heading {
+      max-width: 780px;
+      margin-bottom: 42px;
+    }
+
+    .section-heading h2,
+    .section-heading h2 * {
+      color: var(--deep);
+      font-size: clamp(2.15rem, 4vw, 3.35rem);
+      line-height: 1.12;
+      margin: 12px 0 16px;
+    }
+
+    .section-heading p {
+      color: #69736d;
+      max-width: 650px;
+      margin-inline: auto;
+    }
+
+    .kicker,
+    .mini {
+      color: var(--ocean);
+      font-size: .72rem;
+      letter-spacing: .18em;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* Navigation */
+    .navbar {
+      padding: 11px 0;
+      background: rgba(250, 249, 245, .92) !important;
+      border-bottom: 1px solid rgba(40, 91, 89, .12);
+      box-shadow: 0 8px 30px rgba(52, 59, 57, .045);
+      backdrop-filter: blur(18px);
+    }
+
+    .navbar .container {
+      min-height: 54px;
+    }
+
+    .navbar-brand {
+      color: var(--deep) !important;
+    }
+
+    .brandmark {
+      width: 43px;
+      height: 43px;
+      background: var(--sage);
+      color: var(--ocean);
+      box-shadow: none;
+      font-size: 21px;
+    }
+
+    .brandname {
+      color: var(--deep);
+      font-size: 1.22rem;
+      letter-spacing: -.03em;
+    }
+
+    .brandtag {
+      color: #7b8980;
+      font-size: .57rem;
+      letter-spacing: .14em;
+    }
+
+    .navbar .nav-link {
+      color: #4c5a54 !important;
+      font-size: .83rem;
+      font-weight: 600;
+      margin: 0 2px;
+      padding: 9px 10px !important;
+      transition: color .2s ease;
+    }
+
+    .navbar .nav-link:hover {
+      color: var(--ocean) !important;
+      transform: none;
+    }
+
+    .navbar-toggler {
+      border-color: rgba(40, 91, 89, .25);
+    }
+
+    .navbar-toggler:focus {
+      box-shadow: 0 0 0 .2rem rgba(40, 91, 89, .12);
+    }
+
+    .navbar-toggler-icon {
+      filter: invert(.45);
+    }
+
+    .btn-glow,
+    .btn-primary {
+      color: #fff !important;
+      background: var(--ocean);
+      border: 1px solid var(--ocean);
+      border-radius: 999px;
+      padding: 12px 22px;
+      font-size: .88rem;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(40, 91, 89, .15);
+      transition: transform .22s ease, background .22s ease, box-shadow .22s ease;
+    }
+
+    .btn-glow:hover,
+    .btn-primary:hover {
+      background: #204c4a;
+      border-color: #204c4a;
+      color: #fff !important;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(40, 91, 89, .2);
+    }
+
+    .btn-outline-light {
+      color: #fff !important;
+      border: 1px solid rgba(255, 255, 255, .75);
+      background: rgba(255, 255, 255, .08);
+      border-radius: 999px;
+      padding: 11px 21px;
+      backdrop-filter: blur(6px);
+    }
+
+    .btn-outline-light:hover {
+      background: #fff;
+      color: var(--ocean) !important;
+      border-color: #fff;
+    }
+
+    /* Hero: cinematic photography, polished editorial type */
+    .hero {
+      min-height: min(850px, 100svh);
+      padding-top: 70px;
+      border: 0;
+      background: #dce8d5;
+    }
+
+    .hero-bg {
+      background:
+        linear-gradient(90deg, rgba(24, 48, 44, .68) 0%, rgba(24, 48, 44, .42) 48%, rgba(24, 48, 44, .08) 100%),
+        linear-gradient(0deg, rgba(24, 48, 44, .28), transparent 42%),
+        url("https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=2200&q=90") center 55%/cover;
+      filter: saturate(.88);
+      animation: none;
+      transform: none;
+    }
+
+    .hero-content {
+      max-width: 760px;
+      padding-top: 80px;
+      padding-bottom: 95px;
+    }
+
+    .eyebrow {
+      padding: 8px 13px;
+      color: #fff;
+      background: rgba(250, 249, 245, .14);
+      border: 1px solid rgba(255, 255, 255, .36);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .13em;
+      backdrop-filter: blur(12px);
+    }
+
+    .pulse-dot {
+      background: #dce8d5;
+      box-shadow: none;
+    }
+
+    .hero h1 {
+      max-width: 780px;
+      color: #fff;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(3.1rem, 7.1vw, 6.1rem);
+      line-height: 1.02;
+      letter-spacing: -.055em;
+      margin: 27px 0 22px;
+      text-wrap: balance;
+    }
+
+    .hero h1 span {
+      color: #f6dde3;
+      text-shadow: none;
+    }
+
+    .hero p {
+      max-width: 580px;
+      color: rgba(255, 255, 255, .9);
+      font-size: clamp(1rem, 1.35vw, 1.13rem);
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .hero-stats {
+      gap: clamp(20px, 3vw, 40px);
+      margin-top: 46px;
+    }
+
+    .stat {
+      padding-left: 15px;
+      border-left: 1px solid rgba(255, 255, 255, .48);
+    }
+
+    .stat strong {
+      color: #fff;
+      font-size: 1.15rem;
+      font-family: "DM Sans", sans-serif;
+      font-weight: 700;
+    }
+
+    .stat span {
+      color: rgba(255, 255, 255, .78);
+      font-size: .75rem;
+    }
+
+    .scroll-cue {
+      color: rgba(255, 255, 255, .78);
+      font-size: .65rem;
+      letter-spacing: .18em;
+    }
+
+    .scroll-cue span {
+      border-color: rgba(255, 255, 255, .65);
+    }
+
+    .scroll-cue span:after {
+      background: #fff;
+    }
+
+    /* Consistent light surfaces and cards */
+    .glass-panel,
+    .about-card,
+    .form-panel,
+    .contact-card,
+    .benefit-box,
+    .featured-strip {
+      color: var(--deep);
+      background: rgba(255, 255, 255, .76);
+      border: 1px solid rgba(40, 91, 89, .12);
+      box-shadow: 0 18px 50px rgba(52, 59, 57, .055);
+      backdrop-filter: blur(10px);
+    }
+
+    .glass-panel {
+      border-radius: 24px;
+    }
+
+    .about-card {
+      background: linear-gradient(135deg, #f6dde3 0%, #faf9f5 58%, #dce8d5 100%);
+    }
+
+    .about-card p,
+    .benefit-item p,
+    .contact-card p,
+    .form-panel>p,
+    .card-body-custom p {
+      color: #68746d;
+    }
+
+    .about-metric {
+      border-color: var(--ocean);
+    }
+
+    .about-metric strong {
+      color: var(--ocean);
+    }
+
+    .about-metric span {
+      color: #68746d;
+    }
+
+    .benefit-icon {
+      background: var(--sage);
+      border: 1px solid rgba(40, 91, 89, .1);
+    }
+
+    .benefit-item {
+      border-color: rgba(40, 91, 89, .12);
+    }
+
+    .benefit-item h4 {
+      color: var(--deep);
+    }
+
+    .benefit-item p {
+      margin-bottom: 0;
+    }
+
+    .filters,
+    .zone-filter {
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .filter-btn {
+      padding: 9px 18px;
+      color: #50615a;
+      background: #fff;
+      border: 1px solid rgba(40, 91, 89, .18);
+      border-radius: 999px;
+      font-size: .83rem;
+      font-weight: 600;
+      transition: all .2s ease;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      color: #fff;
+      background: var(--ocean);
+      border-color: var(--ocean);
+      box-shadow: 0 7px 18px rgba(40, 91, 89, .12);
+    }
+
+    .beach-card,
+    .destination-card {
+      background: #fff;
+      color: var(--deep);
+      border: 1px solid rgba(40, 91, 89, .12);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 12px 34px rgba(52, 59, 57, .06);
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    }
+
+    .beach-card:hover,
+    .destination-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(40, 91, 89, .25);
+      box-shadow: 0 22px 44px rgba(52, 59, 57, .12);
+    }
+
+    .card-image {
+      height: 245px;
+    }
+
+    .card-image:after {
+      background: linear-gradient(transparent, rgba(25, 43, 39, .62));
+    }
+
+    .zone-tag,
+    .tag {
+      color: #fff;
+      background: rgba(40, 66, 60, .74);
+      border: 1px solid rgba(255, 255, 255, .25);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+    }
+
+    .card-body-custom {
+      padding: 22px;
+    }
+
+    .card-body-custom h3,
+    .card-info h3 {
+      color: var(--deep);
+      font-size: 1.45rem;
+    }
+
+    .card-body-custom p {
+      font-size: .9rem;
+    }
+
+    .card-foot {
+      color: var(--ocean);
+      font-weight: 700;
+    }
+
+    .arrow-round {
+      border-color: rgba(40, 91, 89, .3);
+      color: var(--ocean);
+    }
+
+    .beach-card:hover .arrow-round {
+      background: var(--ocean);
+      color: #fff;
+    }
+
+    .destination-grid {
+      gap: 24px;
+    }
+
+    .destination-card {
+      position: relative;
+      min-width: 0;
+    }
+
+    .destination-card>img {
+      height: 260px;
+      object-fit: cover;
+    }
+
+    .card-top {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      right: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-top .tag {
+      padding: 7px 11px;
+      font-size: .65rem;
+      letter-spacing: .08em;
+    }
+
+    .heart {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      color: #fff;
+      background: rgba(35, 54, 48, .6);
+      border: 1px solid rgba(255, 255, 255, .5);
+      backdrop-filter: blur(8px);
+    }
+
+    .card-info {
+      padding: 22px;
+    }
+
+    .card-info .location {
+      color: var(--ocean);
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+    }
+
+    .card-info p {
+      color: #68746d;
+      font-size: .88rem;
+      line-height: 1.75;
+    }
+
+    .card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .rating {
+      color: #8a6b37;
+      font-size: .78rem;
+    }
+
+    .explore {
+      color: var(--ocean);
+      font-size: .83rem;
+      font-weight: 700;
+    }
+
+    .explore:hover {
+      color: #173f3d;
+    }
+
+    .featured-strip {
+      padding: clamp(16px, 3vw, 28px);
+      border-radius: 26px;
+    }
+
+    .featured-img {
+      border-radius: 18px;
+    }
+
+    .featured-img:after {
+      background: linear-gradient(transparent, rgba(24, 42, 38, .72));
+    }
+
+    .featured-caption small {
+      color: rgba(255, 255, 255, .82);
+    }
+
+    .gallery-tile {
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(52, 59, 57, .08);
+    }
+
+    .gallery-tile:after {
+      background: rgba(40, 91, 89, .88);
+      border-color: rgba(255, 255, 255, .5);
+    }
+
+    .gallery-tile span {
+      color: #fff;
+    }
+
+    .form-control,
+    .form-select {
+      color: var(--deep);
+      background: #fff;
+      border: 1px solid rgba(40, 91, 89, .2);
+      border-radius: 12px;
+      padding: 13px 15px;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      color: var(--deep);
+      background: #fff;
+      border-color: #6c9d95;
+      box-shadow: 0 0 0 .22rem rgba(108, 157, 149, .18);
+    }
+
+    .form-control::placeholder {
+      color: #89938c;
+    }
+
+    .form-select option {
+      background: #fff;
+      color: var(--deep);
+    }
+
+    .form-label {
+      color: #4f5e56;
+      font-size: .86rem;
+      font-weight: 600;
+    }
+
+    .form-panel h3 {
+      color: var(--deep);
+    }
+
+    .form-message {
+      color: var(--ocean);
+    }
+
+    .contact-card .big-icon {
+      color: var(--ocean);
+    }
+
+    .sitemap-links a {
+      color: #52625a;
+      border-color: rgba(40, 91, 89, .2);
+      background: rgba(255, 255, 255, .6);
+    }
+
+    .sitemap-links a:hover {
+      background: var(--ocean);
+      color: #fff;
+    }
+
+    footer {
+      color: #e8eee8;
+      background: #294743;
+      border-top: 0;
+      padding: 38px 0;
+    }
+
+    footer p,
+    footer .text-muted,
+    footer small {
+      color: rgba(255, 255, 255, .7) !important;
+    }
+
+    .footer-brand {
+      color: #fff;
+    }
+
+    .socials a {
+      color: #fff;
+      border-color: rgba(255, 255, 255, .3);
+    }
+
+    .socials a:hover {
+      color: var(--ocean);
+      background: var(--sage);
+    }
+
+    #toTop {
+      color: #fff;
+      background: var(--ocean);
+      border: 0;
+      box-shadow: 0 8px 22px rgba(40, 91, 89, .22);
+    }
+
+    .modal-content {
+      color: var(--deep);
+      background: var(--cream);
+      border: 1px solid var(--line);
+    }
+
+    .modal-header,
+    .modal-footer {
+      border-color: var(--line);
+    }
+
+    .toast-msg {
+      color: #fff;
+      background: var(--ocean);
+      border: 1px solid rgba(255, 255, 255, .25);
+    }
+
+    .reveal {
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    @media (min-width: 1200px) {
+      .container {
+        max-width: 1160px;
+      }
+    }
+
+    @media (max-width: 991px) {
+      .navbar-collapse {
+        margin-top: 10px;
+        padding: 12px 0 8px;
+        border-top: 1px solid rgba(40, 91, 89, .12);
+      }
+
+      .navbar .nav-link {
+        padding: 10px 0 !important;
+      }
+
+      .navbar .btn-glow {
+        display: inline-block;
+        margin-top: 8px;
+      }
+
+      .hero {
+        min-height: 760px;
+      }
+
+      .hero-content {
+        padding-top: 80px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .container {
+        --bs-gutter-x: 1.35rem;
+      }
+
+      .hero {
+        min-height: 740px;
+        padding-top: 56px;
+      }
+
+      .hero-bg {
+        background:
+          linear-gradient(90deg, rgba(24, 48, 44, .66), rgba(24, 48, 44, .32)),
+          linear-gradient(0deg, rgba(24, 48, 44, .25), transparent 45%),
+          url("https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1400&q=85") 58% center/cover;
+      }
+
+      .hero-content {
+        padding-top: 85px;
+        padding-bottom: 80px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.7rem, 11vw, 4.1rem);
+        line-height: 1.04;
+        letter-spacing: -.05em;
+      }
+
+      .hero p {
+        font-size: .98rem;
+      }
+
+      .hero-stats {
+        gap: 14px 18px;
+        margin-top: 32px;
+      }
+
+      .stat {
+        min-width: 125px;
+      }
+
+      .stat strong {
+        font-size: 1rem;
+      }
+
+      .stat span {
+        font-size: .7rem;
+      }
+
+      .section {
+        padding: 64px 0;
+      }
+
+      .section-heading {
+        margin-bottom: 30px;
+      }
+
+      .destination-grid {
+        gap: 18px;
+      }
+
+      .destination-card>img {
+        height: 230px;
+      }
+
+      .card-info {
+        padding: 19px;
+      }
+
+      .gallery-tile {
+        height: 210px;
+      }
+
+      .scroll-cue {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+
+    /* Final refinements: sunset logo palette, clear type scale and simple controls. */
+    :root {
+      --ocean: #087f8c;
+      --aqua: #ee9446;
+      --deep: #303b36;
+      --cream: #fcfaf5;
+      --pink: #ffe3ca;
+      --sage: #dcece5;
+      --line: rgba(8, 127, 140, .18);
+    }
+
+    body {
+      font-size: 16px;
+      line-height: 1.7;
+      letter-spacing: 0;
+      color: var(--deep);
+    }
+
+    .navbar {
+      background: rgba(252, 250, 245, .96) !important;
+      border-bottom-color: rgba(8, 127, 140, .16);
+      box-shadow: 0 8px 32px rgba(40, 55, 49, .08);
+    }
+
+    .brandmark,
+    .brandmark.footer-brandmark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      width: 58px;
+      height: 46px;
+      padding: 0;
+      overflow: visible;
+      border-radius: 0;
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+
+    .brandmark img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
+    .brandmark.footer-brandmark {
+      width: 55px;
+      height: 43px;
+    }
+
+    .brandname {
+      font-size: clamp(1.03rem, 1.5vw, 1.22rem);
+      line-height: 1.2;
+      letter-spacing: -.025em;
+    }
+
+    .brandtag {
+      margin-top: 3px;
+      font-size: .54rem;
+      letter-spacing: .11em;
+      line-height: 1.4;
+    }
+
+    .navbar .nav-link {
+      white-space: nowrap;
+      font-size: .79rem;
+      font-weight: 700;
+      padding: 8px 8px !important;
+    }
+
+    .navbar .nav-link.nav-contact {
+      color: #fff !important;
+      background: var(--ocean);
+      border-radius: 999px;
+      padding: 8px 13px !important;
+    }
+
+    .navbar .nav-link.nav-contact:hover {
+      color: #fff !important;
+      background: #066b76;
+    }
+
+    .hero {
+      min-height: min(840px, 100svh);
+    }
+
+    .hero h1 {
+      max-width: 800px;
+      font-size: clamp(2.85rem, 6.6vw, 5.8rem);
+      line-height: 1.04;
+      letter-spacing: -.045em;
+    }
+
+    .hero h1 span {
+      color: #ffc078;
+      text-shadow: 0 2px 22px rgba(238, 148, 70, .16);
+    }
+
+    .eyebrow {
+      border-color: rgba(255, 224, 183, .48);
+      background: rgba(33, 48, 39, .38);
+    }
+
+    .pulse-dot {
+      background: #ffc078;
+    }
+
+    .btn-glow,
+    .btn-primary {
+      color: #fff !important;
+      background: var(--ocean);
+      border-color: var(--ocean);
+      box-shadow: 0 9px 22px rgba(8, 127, 140, .22);
+    }
+
+    .btn-glow:hover,
+    .btn-primary:hover {
+      background: #066b76;
+      border-color: #066b76;
+    }
+
+    .section-heading h2,
+    .section-heading h2 * {
+      font-size: clamp(2rem, 3.7vw, 3.1rem);
+      line-height: 1.16;
+      letter-spacing: -.035em;
+    }
+
+    .kicker,
+    .mini {
+      color: var(--ocean);
+      font-size: .7rem;
+      letter-spacing: .16em;
+    }
+
+    .destination-search {
+      width: min(560px, 100%);
+      margin: 0 auto 30px;
+      padding: 18px 20px 13px;
+      border: 1px solid rgba(8, 127, 140, .13);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .72);
+      box-shadow: 0 10px 28px rgba(52, 59, 57, .045);
+    }
+
+    .destination-search label {
+      display: block;
+      margin: 0 0 8px;
+      color: var(--deep);
+      font-size: .84rem;
+      font-weight: 700;
+    }
+
+    .destination-search-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .destination-search input {
+      width: 100%;
+      min-width: 0;
+      padding: 11px 13px;
+      border: 1px solid rgba(8, 127, 140, .2);
+      border-radius: 11px;
+      outline: none;
+      color: var(--deep);
+      background: #fff;
+      font-size: .9rem;
+    }
+
+    .destination-search input:focus {
+      border-color: var(--ocean);
+      box-shadow: 0 0 0 3px rgba(8, 127, 140, .1);
+    }
+
+    .destination-search-control button {
+      padding: 10px 14px;
+      color: var(--ocean);
+      background: var(--sage);
+      border: 1px solid rgba(8, 127, 140, .16);
+      border-radius: 11px;
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    #searchMessage {
+      margin: 8px 0 0;
+      color: #69776f;
+      font-size: .75rem;
+      line-height: 1.5;
+    }
+
+    .destination-card[hidden] {
+      display: none !important;
+    }
+
+    .destination-card>img {
+      height: 245px;
+    }
+
+    .card-info {
+      padding: 20px 21px 22px;
+    }
+
+    .card-info h3 {
+      font-size: 1.42rem;
+      line-height: 1.25;
+      margin: 7px 0 8px;
+    }
+
+    .card-info p {
+      font-size: .86rem;
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .heart.liked {
+      color: #fff;
+      background: #e7796b;
+      border-color: #e7796b;
+    }
+
+    .gallery-tile {
+      cursor: zoom-in;
+      outline-offset: 4px;
+    }
+
+    .gallery-tile:focus-visible,
+    .navbar a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid rgba(238, 148, 70, .75);
+      outline-offset: 3px;
+    }
+
+    .contact-card {
+      padding: 28px 25px;
+      border-radius: 20px;
+    }
+
+    .contact-card h4 {
+      margin: 12px 0 9px;
+      color: var(--deep);
+      font-size: 1.13rem;
+    }
+
+    .contact-card p {
+      font-size: .9rem;
+      line-height: 1.75;
+    }
+
+    .feedback-note {
+      color: #68746d;
+      font-size: .8rem;
+    }
+
+    .sitemap-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .sitemap-links a {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 10px 15px;
+      font-size: .82rem;
+      font-weight: 600;
+    }
+
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    #toTop {
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity .2s ease, transform .2s ease;
+      z-index: 1100;
+    }
+
+    #toTop.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .toast-msg {
+      z-index: 2100;
+      opacity: 0;
+      visibility: hidden;
+      transform: translate(-50%, 18px);
+      transition: opacity .22s ease, transform .22s ease, visibility .22s ease;
+      background: #273d37;
+      color: #fff;
+    }
+
+    .toast-msg.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 0);
+    }
+
+    /* Native modal visibility; Bootstrap's stylesheet is still used for its grid and utility classes. */
+    #imageModal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background: rgba(17, 31, 27, .84);
+      z-index: 2050;
+      padding: 22px;
+    }
+
+    #imageModal.is-open {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #imageModal .modal-dialog {
+      width: min(1100px, 100%);
+      margin: auto;
+    }
+
+    #imageModal .modal-content {
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .24);
+    }
+
+    #imageModal .modal-header {
+      padding: 14px 20px;
+    }
+
+    #imageModal .modal-body img {
+      max-height: 75vh;
+    }
+
+    @media (max-width: 1199px) {
+      .navbar .nav-link {
+        font-size: .76rem;
+        padding: 8px 6px !important;
+      }
+
+      .brandmark {
+        width: 52px;
+      }
+    }
+
+    @media (max-width: 991px) {
+      .navbar-collapse {
+        padding: 13px 0 8px;
+        margin-top: 10px;
+        border-top: 1px solid rgba(8, 127, 140, .14);
+      }
+
+      .navbar .nav-link {
+        display: block;
+        padding: 10px 8px !important;
+        font-size: .9rem;
+      }
+
+      .navbar .nav-link.nav-contact {
+        display: inline-block;
+        margin: 5px 0;
+        padding: 9px 14px !important;
+      }
+
+      .hero-content {
+        padding-top: 68px;
+      }
+    }
+
+    @media (max-width: 575px) {
+      .navbar-brand {
+        gap: 7px !important;
+      }
+
+      .brandmark {
+        width: 46px;
+        height: 40px;
+      }
+
+      .brandname {
+        font-size: 1rem;
+      }
+
+      .brandtag {
+        font-size: .48rem;
+        letter-spacing: .08em;
+      }
+
+      .destination-search {
+        padding: 15px 14px 12px;
+      }
+
+      .destination-search-control {
+        gap: 7px;
+      }
+
+      .destination-search-control button {
+        padding: 10px 11px;
+      }
+
+      #imageModal {
+        padding: 10px;
+      }
+    }
+
+
+
+    /* ==============================================
+       FINAL LAYOUT & COMPOSITION POLISH
+       Centered content, consistent spacing, readable text
+       ============================================== */
+    html {
+      scroll-padding-top: 92px;
+    }
+
+    body {
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin-inline: auto;
+    }
+
+    main {
+      overflow: clip;
+    }
+
+    .section,
+    #destinations {
+      padding-top: clamp(64px, 7vw, 92px);
+      padding-bottom: clamp(64px, 7vw, 92px);
+    }
+
+    .section-heading {
+      width: min(100%, 760px);
+      max-width: 760px;
+      margin: 0 auto 34px !important;
+      padding-inline: 12px;
+      text-align: center;
+    }
+
+    .section-heading h2,
+    .section-heading h2 * {
+      margin: 12px 0 16px;
+      font-size: clamp(2rem, 3.8vw, 3.15rem);
+      line-height: 1.17;
+      letter-spacing: -.028em;
+      text-wrap: balance;
+    }
+
+    .section-heading p {
+      max-width: 650px;
+      margin: 0 auto;
+      color: #68746d;
+      font-size: clamp(.94rem, 1.3vw, 1.04rem);
+      font-weight: 400;
+      line-height: 1.75;
+      letter-spacing: normal;
+      text-wrap: pretty;
+    }
+
+    .kicker,
+    .mini {
+      display: inline-block;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    /* Keep the original beach photograph, but give the hero a balanced centered layout. */
+    .hero {
+      min-height: min(830px, 100svh);
+      display: flex;
+      align-items: center;
+      padding: 92px 0 72px;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-content {
+      width: min(100%, 820px);
+      max-width: 820px;
+      margin-inline: auto;
+      padding: 64px 12px 70px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero h1 {
+      width: 100%;
+      max-width: 820px;
+      margin: 23px auto 18px;
+      font-size: clamp(2.85rem, 6.5vw, 5.4rem);
+      line-height: 1.08;
+      letter-spacing: -.045em;
+      text-wrap: balance;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 0 auto;
+      font-size: clamp(.98rem, 1.35vw, 1.08rem);
+      line-height: 1.8;
+      text-wrap: pretty;
+    }
+
+    .hero-actions {
+      justify-content: center;
+      align-items: center;
+      gap: 13px;
+      margin-top: 26px;
+    }
+
+    .hero-stats {
+      width: min(100%, 650px);
+      justify-content: center;
+      align-items: stretch;
+      gap: 18px 30px;
+      margin-top: 38px;
+    }
+
+    .hero-stats .stat {
+      min-width: 145px;
+      padding: 0 12px;
+      border-left: 0;
+      text-align: center;
+    }
+
+    .hero-stats .stat strong {
+      font-size: 1.08rem;
+      line-height: 1.35;
+    }
+
+    .hero-stats .stat span {
+      display: block;
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    .eyebrow {
+      justify-content: center;
+      max-width: 100%;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* Destination search, filters, and cards share the same centered content width. */
+    #destinations>.section-heading {
+      margin-bottom: 30px !important;
+    }
+
+    #destinations .filters {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 auto 26px;
+      padding-inline: 12px;
+    }
+
+    #destinations .destination-search {
+      width: min(100% - 24px, 720px);
+      margin: 0 auto 34px;
+    }
+
+    #destinations .destination-grid {
+      width: min(100% - 24px, 1100px);
+      margin-inline: auto;
+      align-items: stretch;
+      gap: 24px;
+    }
+
+    #destinations .destination-card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    #destinations .destination-card>img {
+      display: block;
+      width: 100%;
+      height: 225px;
+      flex: 0 0 225px;
+      object-fit: cover;
+      background: #e4ebe3;
+    }
+
+    #destinations .card-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 21px;
+    }
+
+    #destinations .card-info h3 {
+      line-height: 1.25;
+      margin: 7px 0 9px;
+    }
+
+    #destinations .card-info p {
+      flex: 1;
+      min-height: 3.1em;
+      margin-bottom: 17px;
+      line-height: 1.7;
+    }
+
+    #destinations .card-bottom {
+      width: 100%;
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid rgba(40, 91, 89, .1);
+    }
+
+    .featured-strip {
+      width: min(100%, 1100px);
+      margin-inline: auto;
+    }
+
+    .featured-img {
+      height: 185px;
+      min-height: 0;
+    }
+
+    #featured .row.align-items-end {
+      align-items: center !important;
+      row-gap: 14px;
+    }
+
+    #featured .row.align-items-end>div:first-child {
+      text-align: left;
+    }
+
+    #featured .row.align-items-end p {
+      color: #68746d !important;
+      line-height: 1.7;
+    }
+
+    #benefits .benefit-box {
+      padding: clamp(22px, 3vw, 34px);
+    }
+
+    #benefits .benefit-box>p {
+      color: #68746d !important;
+      line-height: 1.8;
+    }
+
+    #benefits .row {
+      align-items: stretch;
+    }
+
+    #gallery .row {
+      row-gap: 20px;
+    }
+
+    .gallery-tile {
+      width: 100%;
+      height: clamp(210px, 25vw, 285px);
+      min-height: 0;
+      background: #e5ede6;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    .gallery-tile img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .gallery-tile span {
+      z-index: 1;
+      left: 18px;
+      right: 18px;
+      bottom: 17px;
+      color: #fff;
+      line-height: 1.35;
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      text-wrap: balance;
+    }
+
+    #about .about-card {
+      width: min(100%, 1100px);
+      margin-inline: auto;
+      padding: clamp(24px, 4vw, 48px);
+    }
+
+    #about .about-card .row {
+      align-items: center;
+      row-gap: 26px;
+    }
+
+    #about .about-card h2 {
+      font-size: clamp(2rem, 3.8vw, 3.15rem);
+      line-height: 1.16;
+      margin-bottom: 18px;
+      text-wrap: balance;
+    }
+
+    #about .about-card p {
+      color: #68746d;
+      line-height: 1.8;
+      max-width: 690px;
+    }
+
+    #about .about-metric {
+      padding: 14px 16px;
+      border-left: 3px solid var(--ocean);
+      background: rgba(255, 255, 255, .5);
+      border-radius: 0 14px 14px 0;
+    }
+
+    /* Soft beach photo behind feedback only. The cream overlay keeps the copy readable. */
+    #feedback.section {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: clamp(72px, 8vw, 100px) 0;
+      margin: 10px 0;
+      background: #f3ebdd;
+    }
+
+    #feedback.section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background-image:
+        linear-gradient(125deg, rgba(250, 249, 245, .9), rgba(250, 249, 245, .82)),
+        url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1800&q=85");
+      background-position: center, center 52%;
+      background-size: cover, cover;
+      background-repeat: no-repeat;
+    }
+
+    #feedback.section::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background: radial-gradient(ellipse at 12% 20%, rgba(246, 221, 227, .27), transparent 38%),
+        radial-gradient(ellipse at 88% 85%, rgba(220, 232, 213, .32), transparent 42%);
+    }
+
+    #feedback .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    #feedback .section-heading {
+      margin-bottom: 34px !important;
+    }
+
+    #feedback .row {
+      justify-content: center;
+      row-gap: 18px;
+    }
+
+    #feedback .contact-card,
+    #contact .contact-card {
+      height: 100%;
+      padding: clamp(22px, 2.8vw, 31px);
+      border-radius: 22px;
+      text-align: center;
+      background: rgba(255, 255, 255, .91);
+      border: 1px solid rgba(40, 91, 89, .14);
+      box-shadow: 0 14px 36px rgba(52, 59, 57, .075);
+      backdrop-filter: blur(5px);
+    }
+
+    #feedback .contact-card .big-icon,
+    #contact .contact-card .big-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 14px;
+      border-radius: 15px;
+      color: var(--ocean);
+      background: var(--sage);
+      font-size: 1.35rem;
+    }
+
+    #feedback .contact-card h4,
+    #contact .contact-card h4 {
+      font-size: 1.2rem;
+      line-height: 1.3;
+      margin: 0 0 10px;
+    }
+
+    #feedback .contact-card p,
+    #contact .contact-card p {
+      margin: 0;
+      color: #68746d;
+      font-size: .91rem;
+      line-height: 1.75;
+    }
+
+    .feedback-note {
+      width: min(100%, 650px);
+      margin-inline: auto;
+      padding-inline: 12px;
+      line-height: 1.65;
+    }
+
+    #contact .section-heading {
+      margin-bottom: 34px !important;
+    }
+
+    #contact .row {
+      justify-content: center;
+      row-gap: 18px;
+    }
+
+    #contact .contact-card a {
+      display: inline-block;
+      margin-top: 14px;
+      color: var(--ocean) !important;
+      font-weight: 700;
+      font-size: .88rem;
+    }
+
+    #sitemap .glass-panel {
+      width: min(100%, 1100px);
+      margin-inline: auto;
+      padding: clamp(22px, 4vw, 42px) !important;
+      text-align: center;
+    }
+
+    #sitemap .sitemap-links {
+      justify-content: center;
+      gap: 10px;
+    }
+
+    #sitemap .sitemap-links a {
+      justify-content: center;
+      color: #40544b;
+      background: rgba(255, 255, 255, .78);
+      border: 1px solid rgba(40, 91, 89, .15);
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    #sitemap .sitemap-links a:hover {
+      color: #fff;
+      background: var(--ocean);
+      transform: translateY(-2px);
+    }
+
+    /* Prevent oversized/blank image boxes and keep the logo proportional. */
+    img {
+      max-width: 100%;
+    }
+
+    .brandmark {
+      width: 54px;
+      height: 46px;
+      flex: 0 0 54px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #faf9f5;
+      border: 1px solid rgba(40, 91, 89, .13);
+    }
+
+    .brandmark img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .footer-brandmark {
+      width: 58px;
+      height: 46px;
+      flex-basis: 58px;
+      background: #faf9f5;
+    }
+
+    .destination-card>img,
+    .featured-img img,
+    .gallery-tile img {
+      background-color: #e5ede6;
+    }
+
+    .toast-msg {
+      max-width: calc(100vw - 32px);
+      padding: 13px 20px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 991px) {
+      .hero {
+        min-height: 760px;
+      }
+
+      .hero-content {
+        padding-top: 80px;
+        padding-bottom: 85px;
+      }
+
+      .navbar-collapse {
+        background: rgba(250, 249, 245, .98);
+        border-radius: 0 0 18px 18px;
+      }
+
+      #featured .row.align-items-end>div:first-child,
+      #featured .row.align-items-end>div:last-child {
+        text-align: center !important;
+      }
+
+      #featured .row.align-items-end .eyebrow {
+        margin-inline: auto;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .container {
+        --bs-gutter-x: 1.35rem;
+      }
+
+      .section,
+      #destinations {
+        padding-top: 62px;
+        padding-bottom: 62px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 74px 0 45px;
+      }
+
+      .hero-content {
+        padding: 72px 8px 72px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.55rem, 10.5vw, 4rem);
+        line-height: 1.09;
+      }
+
+      .hero p {
+        font-size: .96rem;
+      }
+
+      .hero-stats {
+        gap: 18px 10px;
+        margin-top: 30px;
+      }
+
+      .hero-stats .stat {
+        min-width: 0;
+        flex: 1 1 28%;
+        padding-inline: 4px;
+      }
+
+      .hero-stats .stat strong {
+        font-size: .98rem;
+      }
+
+      #destinations .destination-grid {
+        width: min(100% - 20px, 520px);
+        gap: 18px;
+      }
+
+      #destinations .destination-card>img {
+        height: 220px;
+        flex-basis: 220px;
+      }
+
+      .featured-img {
+        height: 170px;
+      }
+
+      .gallery-tile {
+        height: clamp(205px, 58vw, 280px);
+      }
+
+      #feedback.section {
+        padding: 64px 0;
+      }
+
+      #feedback.section::before {
+        background-image:
+          linear-gradient(125deg, rgba(250, 249, 245, .93), rgba(250, 249, 245, .87)),
+          url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1000&q=80");
+      }
+
+      #sitemap .sitemap-links a {
+        padding: 9px 12px;
+      }
+
+      footer .row>div {
+        text-align: center !important;
+        justify-content: center;
+      }
+
+      footer .row .d-flex {
+        justify-content: center;
+      }
+
+      .socials {
+        text-align: center !important;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-stats .stat span {
+        font-size: .66rem;
+      }
+
+      .brandname {
+        font-size: .95rem;
+      }
+
+      .brandtag {
+        font-size: .44rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#home" aria-label="BeautyOfBeaches home">
+        <span class="brandmark"><img src="assets/beach-sunset-logo.png" alt="" /></span>
+        <span>
+          <span class="brandname d-block">BeautyOfBeaches</span>
+          <span class="brandtag d-block">EXPLORE · DISCOVER · EXPERIENCE</span>
+        </span>
+      </a>
+      <button class="navbar-toggler" id="menuToggle" type="button" aria-controls="mainNav" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#destinations">Destinations</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="#feedback">Feedback</a></li>
+          <li class="nav-item"><a class="nav-link nav-contact" href="#contact">Contact Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sitemap">Site Map</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <header class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="eyebrow">
+          <span class="pulse-dot"></span> Your next escape starts here
+        </div>
+        <h1>Discover the World's Most <span>Beautiful</span> Beaches.</h1>
+        <p>
+          From crystal-clear waters to golden sands, explore extraordinary
+          coastlines, hidden tropical gems, and unforgettable destinations
+          around the world.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-glow" href="#destinations">⌁ &nbsp; Explore Beaches</a><a class="btn btn-outline-light"
+            href="#featured">▷ &nbsp; Discover Destinations</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>4 Zones</strong><span>Explore every direction</span>
+          </div>
+          <div class="stat">
+            <strong>Worldwide</strong><span>Beautiful coastlines</span>
+          </div>
+          <div class="stat">
+            <strong>Endless</strong><span>Ocean memories</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-cue"><span></span>SCROLL TO EXPLORE</div>
+  </header>
+  <main>
+    <section id="destinations">
+      <div class="section-heading reveal">
+        <span class="mini">EXPLORE THE WORLD</span>
+        <h2>Beautiful Beach Destinations</h2>
+        <p>
+          From hidden tropical coves to iconic island escapes,
+          discover coastlines that take your breath away.
+        </p>
+      </div>
+
+      <div class="filters reveal">
+        <button class="filter-btn active" data-filter="all">All Beaches</button>
+        <button class="filter-btn" data-filter="island">Islands</button>
+        <button class="filter-btn" data-filter="tropical">Tropical</button>
+        <button class="filter-btn" data-filter="adventure">Adventure</button>
+      </div>
+
+      <div class="destination-search reveal" role="search" aria-label="Search beach destinations">
+        <label for="destinationSearch">Find your next coastline</label>
+        <div class="destination-search-control">
+          <input id="destinationSearch" type="search" maxlength="40" placeholder="Try Maldives, Bali or Greece"
+            autocomplete="off" aria-describedby="searchMessage" />
+          <button id="clearSearch" type="button">Clear</button>
+        </div>
+        <p id="searchMessage" aria-live="polite">Search by beach name or destination.</p>
+      </div>
+
+      <div class="destination-grid">
+
+        <article class="destination-card reveal" data-category="island">
+          <img loading="lazy"
+            src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=900&q=85"
+            alt="Maldives tropical island">
+          <div class="card-top">
+            <span class="tag">✦ TOP DESTINATION</span>
+            <button class="heart" aria-label="Add Maldives to favorites">♡</button>
+          </div>
+          <div class="card-info">
+            <span class="location">INDIAN OCEAN</span>
+            <h3>Maldives</h3>
+            <p>Turquoise lagoons, white sand and peaceful island escapes.</p>
+            <div class="card-bottom">
+              <span class="rating">★ 4.9 <span style="color:#69736d"> Paradise island</span></span>
+              <a href="#featured" class="explore">Explore ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="destination-card reveal" data-category="tropical">
+          <img loading="lazy"
+            src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=900&q=85"
+            alt="Santorini coastline and blue sea">
+          <div class="card-top">
+            <span class="tag">BLUE HORIZONS</span>
+            <button class="heart" aria-label="Add Greece to favorites">♡</button>
+          </div>
+          <div class="card-info">
+            <span class="location">GREECE</span>
+            <h3>Santorini</h3>
+            <p>Bright blue horizons, coastal charm and unforgettable views.</p>
+            <div class="card-bottom">
+              <span class="rating">★ 4.8 <span style="color:#69736d"> Coastal escape</span></span>
+              <a href="#featured" class="explore">Explore ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="destination-card reveal" data-category="island">
+          <img loading="lazy"
+            src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=85"
+            alt="Bali tropical beach and palm trees">
+          <div class="card-top">
+            <span class="tag">TROPICAL MAGIC</span>
+            <button class="heart" aria-label="Add Bali to favorites">♡</button>
+          </div>
+          <div class="card-info">
+            <span class="location">INDONESIA</span>
+            <h3>Bali</h3>
+            <p>Lush tropical landscapes, warm waves and island culture.</p>
+            <div class="card-bottom">
+              <span class="rating">★ 4.9 <span style="color:#69736d"> Island adventure</span></span>
+              <a href="#featured" class="explore">Explore ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="destination-card reveal" data-category="adventure">
+          <img loading="lazy"
+            src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85"
+            alt="Ocean waves rolling towards the shore">
+          <div class="card-top">
+            <span class="tag">WILD & FREE</span>
+            <button class="heart" aria-label="Add ocean escape to favorites">♡</button>
+          </div>
+          <div class="card-info">
+            <span class="location">COASTAL ESCAPE</span>
+            <h3>Ocean Paradise</h3>
+            <p>Discover the rhythm of the waves and the beauty of the sea.</p>
+            <div class="card-bottom">
+              <span class="rating">★ 4.8 <span style="color:#69736d"> Ocean views</span></span>
+              <a href="#featured" class="explore">Explore ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="destination-card reveal" data-category="tropical">
+          <img loading="lazy"
+            src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=85"
+            alt="Tropical sea and island coastline">
+          <div class="card-top">
+            <span class="tag">HIDDEN GEM</span>
+            <button class="heart" aria-label="Add tropical escape to favorites">♡</button>
+          </div>
+          <div class="card-info">
+            <span class="location">TROPICAL COAST</span>
+            <h3>Secret Lagoon</h3>
+            <p>Explore peaceful waters and imagine your perfect getaway.</p>
+            <div class="card-bottom">
+              <span class="rating">★ 4.7 <span style="color:#69736d"> Hidden paradise</span></span>
+              <a href="#featured" class="explore">Explore ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="destination-card reveal" data-category="adventure">
+          <img loading="lazy"
+            src="https://images.unsplash.com/photo-1468413253725-0d5181091126?auto=format&fit=crop&w=900&q=85"
+            alt="Aerial view of beautiful tropical islands">
+          <div class="card-top">
+            <span class="tag">ISLAND ADVENTURE</span>
+            <button class="heart" aria-label="Add island adventure to favorites">♡</button>
+          </div>
+          <div class="card-info">
+            <span class="location">ISLAND GETAWAY</span>
+            <h3>Blue Lagoon</h3>
+            <p>Discover incredible coastlines and the beauty of island life.</p>
+            <div class="card-bottom">
+              <span class="rating">★ 4.9 <span style="color:#69736d"> Island discovery</span></span>
+              <a href="#featured" class="explore">Explore ↗</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+    <section class="section pt-0" id="featured">
+      <div class="container">
+        <div class="row align-items-end mb-4 reveal">
+          <div class="col-lg-8">
+            <div class="kicker">Handpicked for you</div>
+            <h2 class="serif display-5 mt-2">
+              Featured <span style="color: var(--aqua)">Destinations</span>
+            </h2>
+            <p class="mb-0" style="color: #68746d">
+              A few dream-worthy places for your travel inspiration.
+            </p>
+          </div>
+          <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+            <span class="eyebrow">✦ Curated coastal wonders</span>
+          </div>
+        </div>
+        <div class="glass-panel featured-strip reveal">
+          <div class="row g-3">
+            <div class="col-6 col-lg">
+              <div class="featured-img">
+                <img loading="lazy"
+                  src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=700&q=80"
+                  alt="Maldives beach" />
+                <div class="featured-caption">
+                  <h4>Maldives</h4>
+                  <small>Indian Ocean</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-lg">
+              <div class="featured-img">
+                <img loading="lazy"
+                  src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=700&q=80"
+                  alt="Santorini Greece" />
+                <div class="featured-caption">
+                  <h4>Santorini</h4>
+                  <small>Greece</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-lg">
+              <div class="featured-img">
+                <img loading="lazy"
+                  src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=700&q=80"
+                  alt="Bora Bora lagoon" />
+                <div class="featured-caption">
+                  <h4>Bora Bora</h4>
+                  <small>French Polynesia</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-lg">
+              <div class="featured-img">
+                <img loading="lazy"
+                  src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=700&q=80"
+                  alt="Coastal mountain scenery" />
+                <div class="featured-caption">
+                  <h4>Coastal Escape</h4>
+                  <small>Nature's beauty</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section pt-0" id="benefits">
+      <div class="container">
+        <div class="row g-4 align-items-stretch">
+          <div class="col-lg-7 reveal">
+            <div class="benefit-box glass-panel">
+              <div class="kicker">More than a beautiful view</div>
+              <h2 class="serif display-6 mt-2 mb-3">
+                Beaches bring the world
+                <span style="color: var(--aqua)">together.</span>
+              </h2>
+              <p style="color: #68746d; line-height: 1.8">
+                Beach tourism is an important part of many local economies. It
+                welcomes visitors, creates jobs, supports small businesses,
+                and encourages communities to protect their natural coastline.
+              </p>
+              <div class="benefit-item">
+                <div class="benefit-icon">✈</div>
+                <div>
+                  <h4>Boosts Tourism & Revenue</h4>
+                  <p>
+                    Visitors support hotels, restaurants, transport, tours,
+                    and local experiences.
+                  </p>
+                </div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon">♧</div>
+                <div>
+                  <h4>Creates Local Employment</h4>
+                  <p>
+                    Tourism provides work for guides, hospitality teams,
+                    drivers, craftspeople, and many others.
+                  </p>
+                </div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon">⌂</div>
+                <div>
+                  <h4>Supports Small Businesses</h4>
+                  <p>
+                    Local shops, food stalls, boat operators, and artisans
+                    benefit from visitors.
+                  </p>
+                </div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon">♻</div>
+                <div>
+                  <h4>Encourages Conservation</h4>
+                  <p>
+                    Responsible travel can help fund cleaner beaches and
+                    protect fragile coastal habitats.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5 reveal">
+            <div class="h-100 rounded-4 overflow-hidden position-relative"
+              style="min-height: 450px; border: 1px solid var(--line)">
+              <img loading="lazy" style="
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    inset: 0;
+                    object-fit: cover;
+                  " src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1100&q=85"
+                alt="Beautiful nature and coast" />
+              <div style="
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(
+                      0deg,
+                      #031827f2,
+                      transparent 70%
+                    );
+                  "></div>
+              <div style="
+                    position: absolute;
+                    bottom: 25px;
+                    left: 25px;
+                    right: 25px;
+                  ">
+                <span class="eyebrow">Travel thoughtfully</span>
+                <h3 class="serif mt-3" style="font-size: 2rem">
+                  Leave footprints in the sand, not a mark on nature.
+                </h3>
+                <p style="color: #c4e3e8">
+                  Respect the ocean. Support local communities. Keep every
+                  shore beautiful.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="kicker">A little ocean therapy</div>
+          <h2>
+            Postcards from <span style="color: var(--aqua)">Paradise</span>
+          </h2>
+          <p>
+            Explore the colours, textures, and calm of coastlines from around
+            the world.
+          </p>
+        </div>
+        <div class="row g-3">
+          <div class="col-md-6 col-lg-4 reveal">
+            <div class="gallery-tile" data-title="Turquoise Dreams">
+              <img loading="lazy"
+                src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1000&q=85"
+                alt="Turquoise sea" /><span>Turquoise Dreams</span>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 reveal">
+            <div class="gallery-tile" data-title="Palm Paradise">
+              <img loading="lazy"
+                src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1000&q=85"
+                alt="Palm trees at beach" /><span>Palm Paradise</span>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 reveal">
+            <div class="gallery-tile" data-title="Golden Hour">
+              <img loading="lazy"
+                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=85"
+                alt="Beach in golden light" /><span>Golden Hour</span>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 reveal">
+            <div class="gallery-tile" data-title="Island Serenity">
+              <img loading="lazy"
+                src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1000&q=85"
+                alt="Island lagoon" /><span>Island Serenity</span>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 reveal">
+            <div class="gallery-tile" data-title="Coastal Wonders">
+              <img loading="lazy"
+                src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1000&q=85"
+                alt="Rocky coastal cliffs" /><span>Coastal Wonders</span>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 reveal">
+            <div class="gallery-tile" data-title="Blue Horizon">
+              <img loading="lazy"
+                src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=85"
+                alt="Ocean blue horizon" /><span>Blue Horizon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section pt-0" id="about">
+      <div class="container">
+        <div class="about-card glass-panel reveal">
+          <div class="row align-items-center g-4">
+            <div class="col-lg-8">
+              <div class="kicker">Our story & mission</div>
+              <h2 class="serif display-5 mt-2">
+                A world of beaches.<br /><span style="color: var(--aqua)">A lifetime of discovery.</span>
+              </h2>
+              <p>
+                BeautyOfBeaches is a coastal inspiration project created for
+                curious travellers and ocean lovers. We bring beach
+                destinations, natural beauty, and the positive impact of
+                responsible tourism together in one easy-to-explore place.
+              </p>
+              <p>
+                Our mission is simple: inspire people to discover beautiful
+                shores, learn about the communities that depend on them, and
+                travel with care for the ocean.
+              </p>
+              <a href="#contact" class="btn btn-glow mt-2">Connect with us ↗</a>
+            </div>
+            <div class="col-lg-4">
+              <div class="row g-4">
+                <div class="col-6 col-lg-12">
+                  <div class="about-metric">
+                    <strong>Explore</strong><span>Discover new coastlines</span>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-12">
+                  <div class="about-metric">
+                    <strong>Discover</strong><span>Learn local stories</span>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-12">
+                  <div class="about-metric">
+                    <strong>Protect</strong><span>Travel more responsibly</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section pt-0" id="feedback">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="kicker">Your perspective matters</div>
+          <h2>Better beach discovery, <span>together.</span></h2>
+          <p>BeautyOfBeaches is designed to make exploring coastal places simple, inspiring and thoughtful. Here are the
+            ideas that guide this project.</p>
+        </div>
+        <div class="row g-3">
+          <div class="col-md-4 reveal">
+            <div class="contact-card glass-panel h-100">
+              <div class="big-icon">◎</div>
+              <h4>Clear Information</h4>
+              <p>Helpful destination details make it easier to discover a coastline and learn what makes it special.</p>
+            </div>
+          </div>
+          <div class="col-md-4 reveal">
+            <div class="contact-card glass-panel h-100">
+              <div class="big-icon">✦</div>
+              <h4>Beautiful Visuals</h4>
+              <p>Thoughtful photography and comfortable text sizes create a calm, easy-to-explore experience.</p>
+            </div>
+          </div>
+          <div class="col-md-4 reveal">
+            <div class="contact-card glass-panel h-100">
+              <div class="big-icon">♻</div>
+              <h4>Responsible Travel</h4>
+              <p>Respect local communities, protect wildlife and leave every beach as beautiful as you found it.</p>
+            </div>
+          </div>
+        </div>
+        <p class="feedback-note text-center mt-4 mb-0">This simplified version does not collect or store feedback
+          messages.</p>
+      </div>
+    </section>
+    <section class="section pt-0" id="contact">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="kicker">Say hello</div>
+          <h2>
+            Let's Stay <span style="color: var(--aqua)">Connected</span>
+          </h2>
+          <p>
+            Have a suggestion or want to know more about BeautyOfBeaches? We
+            would love to hear from you.
+          </p>
+        </div>
+        <div class="row g-3">
+          <div class="col-md-4 reveal">
+            <div class="contact-card glass-panel">
+              <div class="big-icon">✉</div>
+              <h4>Email</h4>
+              <p>
+                For project questions and suggestions, start with the feedback ideas on this page.
+              </p>
+              <a href="#feedback" style="color: var(--aqua)">View feedback ideas ↗</a>
+            </div>
+          </div>
+          <div class="col-md-4 reveal">
+            <div class="contact-card glass-panel">
+              <div class="big-icon"></div>
+              <h4>Our Mission</h4>
+              <p>
+                Inspire discovery, support coastal communities, and encourage
+                responsible tourism.
+              </p>
+              <a href="#about" style="color: var(--aqua)">Read our story ↗</a>
+            </div>
+          </div>
+          <div class="col-md-4 reveal">
+            <div class="contact-card glass-panel">
+              <div class="big-icon"></div>
+              <h4>Ocean First</h4>
+              <p>
+                Help keep beaches beautiful by respecting wildlife and leaving
+                no litter behind.
+              </p>
+              <a href="#benefits" style="color: var(--aqua)">Learn more ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section pt-0" id="sitemap">
+      <div class="container">
+        <div class="glass-panel p-4 p-lg-5 rounded-4 reveal">
+          <div class="kicker">Find your way around</div>
+          <h2 class="serif mb-4">
+            Quick <span style="color: var(--aqua)">Sitemap</span>
+          </h2>
+          <div class="sitemap-links">
+            <a href="#home">⌂ Home</a>
+            <a href="#about">◎ About</a>
+            <a href="#destinations">◈ Destinations</a>
+            <a href="#gallery">▧ Gallery</a>
+            <a href="#feedback">☷ Feedback</a>
+            <a href="#contact">✉ Contact Us</a>
+            <a href="#sitemap">⌘ Site Map</a>
+            <a href="#featured">✦ Featured Destinations</a>
+            <a href="#benefits">♧ Tourism Benefits</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <div class="row align-items-center gy-3">
+        <div class="col-lg-5">
+          <div class="d-flex align-items-center gap-2">
+            <span class="brandmark footer-brandmark"><img src="assets/beach-sunset-logo.png" alt="" /></span>
+            <div>
+              <div class="footer-brand">BeautyOfBeaches</div>
+              <small style="color: #a9cbd4">Explore · Discover · Experience</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 text-lg-center">
+          <small style="color: #a9cbd4">© <span id="year"></span> BeautyOfBeaches. Made for ocean
+            lovers.</small>
+        </div>
+        <div class="col-lg-3 text-lg-end socials">
+          <a href="#gallery" aria-label="Gallery">▧</a><a href="#about" aria-label="About">◎</a><a href="#contact"
+            aria-label="Contact">✉</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <button id="toTop" aria-label="Back to top">↑</button>
+  <div class="toast-msg" id="toast" role="status">
+    Welcome to BeautyOfBeaches — explore a new coastline.
+  </div>
+  <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title serif" id="imageTitle">Beach Gallery</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-2">
+          <img id="modalImage" src="" alt="Selected beach view" style="
+                width: 100%;
+                max-height: 75vh;
+                object-fit: contain;
+                border-radius: 12px;
+              " />
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Keep small page interactions readable and beginner-friendly.
+    var activeCategory = "all";
+    var toastTimer;
+
+    function showToast(message) {
+      var toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(function () {
+        toast.classList.remove("show");
+      }, 2600);
+    }
+
+    // Regular expression: allow letters, spaces, apostrophes and hyphens in a destination search.
+    function isValidSearch(value) {
+      var searchPattern = /^[A-Za-z\s'-]{0,40}$/;
+      return searchPattern.test(value);
+    }
+
+    function filterDestinations() {
+      var searchInput = document.getElementById("destinationSearch");
+      var searchMessage = document.getElementById("searchMessage");
+      var searchText = searchInput.value.trim();
+      var cards = document.querySelectorAll(".destination-card");
+
+      if (!isValidSearch(searchInput.value)) {
+        searchMessage.textContent = "Use letters, spaces, apostrophes or hyphens only.";
+        return;
+      }
+
+      searchMessage.textContent = searchText ? "Showing destinations that match your search." : "Search by beach name or destination.";
+      var searchPattern = searchText ? new RegExp(searchText, "i") : null;
+
+      cards.forEach(function (card) {
+        var matchesCategory = activeCategory === "all" || card.getAttribute("data-category") === activeCategory;
+        var matchesText = !searchPattern || searchPattern.test(card.textContent);
+        card.hidden = !(matchesCategory && matchesText);
+      });
+    }
+
+    function closeMobileMenu() {
+      var menu = document.getElementById("mainNav");
+      var menuButton = document.getElementById("menuToggle");
+      menu.classList.remove("show");
+      menuButton.setAttribute("aria-expanded", "false");
+    }
+
+    function openGalleryImage(tile) {
+      var image = tile.querySelector("img");
+      var modal = document.getElementById("imageModal");
+      document.getElementById("modalImage").src = image.src;
+      document.getElementById("modalImage").alt = image.alt;
+      document.getElementById("imageTitle").textContent = tile.getAttribute("data-title");
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeGalleryImage() {
+      var modal = document.getElementById("imageModal");
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Filter the correct destination cards by category.
+      document.querySelectorAll(".filter-btn").forEach(function (button) {
+        button.addEventListener("click", function () {
+          activeCategory = button.getAttribute("data-filter");
+          document.querySelectorAll(".filter-btn").forEach(function (item) {
+            item.classList.remove("active");
+          });
+          button.classList.add("active");
+          filterDestinations();
+        });
+      });
+
+      // Regex-checked search works together with the category filters.
+      document.getElementById("destinationSearch").addEventListener("input", filterDestinations);
+      document.getElementById("clearSearch").addEventListener("click", function () {
+        document.getElementById("destinationSearch").value = "";
+        filterDestinations();
+        document.getElementById("destinationSearch").focus();
+      });
+
+      // Mobile navigation toggle.
+      document.getElementById("menuToggle").addEventListener("click", function () {
+        var menu = document.getElementById("mainNav");
+        var isOpen = menu.classList.toggle("show");
+        this.setAttribute("aria-expanded", String(isOpen));
+      });
+      document.querySelectorAll("#mainNav a").forEach(function (link) {
+        link.addEventListener("click", closeMobileMenu);
+      });
+
+      // Open the gallery with a simple image viewer.
+      document.querySelectorAll(".gallery-tile").forEach(function (tile) {
+        tile.setAttribute("role", "button");
+        tile.setAttribute("tabindex", "0");
+        tile.setAttribute("aria-label", "Open image: " + tile.getAttribute("data-title"));
+        tile.addEventListener("click", function () { openGalleryImage(tile); });
+        tile.addEventListener("keydown", function (event) {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openGalleryImage(tile);
+          }
+        });
+      });
+      document.querySelector("#imageModal .btn-close").addEventListener("click", closeGalleryImage);
+      document.getElementById("imageModal").addEventListener("click", function (event) {
+        if (event.target === this) closeGalleryImage();
+      });
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") closeGalleryImage();
+      });
+
+      // Mark favourite buttons without storing personal data.
+      document.querySelectorAll(".heart").forEach(function (button) {
+        button.setAttribute("aria-pressed", "false");
+        button.addEventListener("click", function () {
+          var isLiked = button.classList.toggle("liked");
+          button.textContent = isLiked ? "♥" : "♡";
+          button.setAttribute("aria-pressed", String(isLiked));
+          var card = button.closest(".destination-card");
+          var name = card.querySelector("h3").textContent;
+          showToast(isLiked ? name + " added to favourites for this visit." : name + " removed from favourites.");
+        });
+      });
+
+      // Show the back-to-top button after scrolling.
+      var topButton = document.getElementById("toTop");
+      window.addEventListener("scroll", function () {
+        topButton.classList.toggle("show", window.scrollY > 450);
+      });
+      topButton.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+  </script>
+</body>
+
+</html>
